@@ -115,7 +115,6 @@
   각 연산자 종류별로 calculate 메서드 연산 과정을 다르게 오버라이딩하여 다형성 구현
 - 메서드 설명
 
-  calculate
   1. ```public double calculate(double opd1, double opd2)```
      >enum 클래스의 연산자 종류에 맞게 사칙 연산을 수행하고 double형 결과를 반환한다.
      >DIVIDE는 0으로 나누는 경우 예외 처리
@@ -139,12 +138,16 @@
 ### 8.CheckInputExpressionValidationTest
 
 1. 올바른 수식에 대한 파싱 성공 테스트
+
 ```@ValueSource(strings = {"3+47*2/5", "3 + 47 * 2 / 5", "3+ 47 * 2/5"})```
 2. 불순물이 포함된 수식에 대한 예외 발생 테스트
+
 ```@ValueSource(strings = {"3+a47*2/5", "3&47*2/5", "4+2-A&B"})```
 3. 표현식이 빈 문자열 혹은 공백으로 이뤄진 경우 예외 발생 테스트
+
 ```@ValueSource(strings = {"", "    "}```
 4. 수식의 문법이 잘못된 경우 예외 발생 테스트
+
 ```@ValueSource(strings = {"+3*4", "2+3*", "+3*4/", "2*/34"})```
 ### 9.PostFixExpressionConverterTest
 
