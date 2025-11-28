@@ -8,7 +8,8 @@
 .idea/
 out/
 target/
-mvnw/
-mvnw.cmd/
 
-calculator/.gitattributes/
+### mvnw ###
+mvnw
+mvnw.cmd
+calculator/.gitattributes

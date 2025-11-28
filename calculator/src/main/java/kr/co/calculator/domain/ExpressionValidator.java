@@ -1,18 +1,6 @@
 package kr.co.calculator.domain;
 
 public class ExpressionValidator {
-    /**
-     * (상황 - 전개 - 질문 - 답변)
-     *
-     * 하나의 메서드는 하나의 기능만 해야 하는 건 알겠는데, 그렇다고 분자, 원자, 쿼크 단위로 쪼개면
-     * 가독성이 떨어질 것 같기도 하다(like 가루 삼겹살)
-     *
-     * 위 문제를 해결하면서 동시에 테스트 코드를 쉽게 작성할 수 있는 방향이 있는가? 있다!
-     *
-     * 큰 메서드(실제 main 함수에서 호출)가 세부 메서드들을 가지고 있는데, 세부 메서드들은
-     * 서두에 던진 조건을 만족하도록 작성한다. 큰 메서드에 대한 테스트는 하지 않는다.
-     */
-
     public String checkNumberAndOper(String expression) {
         // TODO : 입력 값이 null이거나 빈 공백 문자일 경우 exception
         validateNotNull(expression); // null 체크

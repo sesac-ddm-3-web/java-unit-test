@@ -14,19 +14,18 @@ public class CalculatorMain {
         Scanner scanner = new Scanner(System.in);
         String expression = scanner.nextLine();
 
-//        // 2. 문자열에 대한 모든 유효성 검사
-//        String normalized = expressionValidator.checkNumberAndOper(expression);
-//
-//        // 3. 사칙 연산
-//        int answer = calculator.calculate(normalized);
+        while (true) {
+            if (expression.equals("/exit")) {
+                break;
+            }
 
-        int answer = validAndCalculate(expression, calculator, expressionValidator);
-
-        System.out.println(answer);
+            System.out.println(validAndCalculate(expression, calculator, expressionValidator));
+        }
     }
 
     private static int validAndCalculate(String expression, Calculator calculator,
                                          ExpressionValidator expressionValidator) {
+
         //  2. 문자열에 대한 모든 유효성 검사
         String normalized = expressionValidator.checkNumberAndOper(expression);
 
@@ -39,12 +38,9 @@ public class CalculatorMain {
     /**
      * 메서드가 너무 많은 일을 하지 않도록 분리한다.
      * 테스트 할 수 있는 단위로 나누어 구현 목록을 만든다.
-     * 덧셈, 뺄셈, 곱셈, 나눗셈 -> 3
-     * 입력 값이 null이거나 빈 공백 문자일 경우 exception -> 2
-     * 사칙연산 기호가 아닌 경우 exception -> 2
-     * 사칙 연산을 모두 포함하는 기능 구현 -> 3
-     *
-     * 하나의 메서드는 하나의 기능만 수행하도록 설계한다.
-     *
+     * 덧셈, 뺄셈, 곱셈, 나눗셈
+     * 입력 값이 null이거나 빈 공백 문자일 경우 exception
+     * 사칙연산 기호가 아닌 경우 exception
+     * 사칙 연산을 모두 포함하는 기능 구현
      */
 }
