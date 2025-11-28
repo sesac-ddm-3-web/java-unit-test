@@ -138,19 +138,15 @@
 ### 8.CheckInputExpressionValidationTest
 
 1. 올바른 수식에 대한 파싱 성공 테스트
-
 ```@ValueSource(strings = {"3+47*2/5", "3 + 47 * 2 / 5", "3+ 47 * 2/5"})```
 
 2. 불순물이 포함된 수식에 대한 예외 발생 테스트
-
 ```@ValueSource(strings = {"3+a47*2/5", "3&47*2/5", "4+2-A&B"})```
 
 3. 표현식이 빈 문자열 혹은 공백으로 이뤄진 경우 예외 발생 테스트
-
 ```@ValueSource(strings = {"", "    "}```
 
 4. 수식의 문법이 잘못된 경우 예외 발생 테스트
-
 ```@ValueSource(strings = {"+3*4", "2+3*", "+3*4/", "2*/34"})```
 ### 9.PostFixExpressionConverterTest
 
