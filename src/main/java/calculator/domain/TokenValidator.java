@@ -16,7 +16,7 @@ public enum TokenValidator {
         this.positionMatcher = positionMatcher;
     }
 
-    public static TokenValidator findValidator(int index) {
+    public static TokenValidator find(int index) {
         validateIndex(index);
 
         return Arrays.stream(TokenValidator.values())

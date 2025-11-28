@@ -41,7 +41,7 @@ public class ExpressionTokenizer {
 
     private void validateTokenOrder(String[] tokens) {
         for (int i = 0; i < tokens.length; i++) {
-            TokenValidator tokenValidator = TokenValidator.findValidator(i);
+            TokenValidator tokenValidator = TokenValidator.find(i);
 
             tokenValidator.validate(tokens[i], i, tokens.length);
         }
