@@ -48,9 +48,9 @@
   1. String inputExpression을 입력받음
   2. 파싱한 결과를 List<String>으로 반환
   3. 아래 경우에 대한 예외 처리
-    1. 입력 문자열이 빈 값이거나 공백만 입력된 경우
-    2. 숫자와 연산기호(+, -, *, /)외 다른 문자열이 포함된 경우
-    3. 수식 문법이 맞지 않는 경우
+      1. 입력 문자열이 빈 값이거나 공백만 입력된 경우
+      2. 숫자와 연산기호(+, -, *, /)외 다른 문자열이 포함된 경우
+      3. 수식 문법이 맞지 않는 경우
 - 메서드 설명
   (문자열을 직접적으로 비교하지 않으려고 노력해봤습니다.)
   1. ```public List<String> checkInputExpressionValidation(String inputExpression)```
@@ -75,11 +75,11 @@
      >matcher.start()값을 matcher.find()메소드가 찾은 문자열 위치 값으로 설정한다.
      >matcher.start() 값과 currentPos 값을 비교한다.
      >(값이 서로 다른 경우 예외 발생)
-     >matcher.end() 메서드는 현재 탐색에 성공한 토큰의 다음 탐색 시작 위치 값을 반환한다.
+     >matcher.end() 메서드는 현재 탐색에 성공한 토큰의 위치 값에 1을 더해 다음 탐색할 위치 값을 반환한다.
      >이 값을 currentPos에 대입하고 다음 while문에서 갱신된 currentPos 위치서부터 다시 matcher.find()를 수행한다.
      >
      >만약 (3+4+A-1)와 같이 중간에 불순물이 포함되어 matcher.find()가 그 불순물을 건너뛰고 그 뒤에 토큰을 찾은 경우
-     >matcher.start()는 건너뛴 만큼 더 큰 위치 값을 가질 것이고 currentPos는 그보다 작은 불순물의 위치값을 가지고있을 것이다.
+     >matcher.start()는 건너뛴 만큼 더 큰 값을 가질 것이고 currentPos는 그보다 작은 불순물의 위치값을 가지고있을 것이다.
      >따라서 이 때 if 조건문을 실행했을 때 matcher.find()값과 currentPos값이 다르고 불순물 예외가 발생한다.
      >
      >근데 (3+4+A*B)처럼 끝까지 불순물로 이뤄진 경우는 matcher.find()가 실패해서 false를 반환해 if의 예외를 발생시킬 수 없다.
@@ -92,30 +92,36 @@
 **###3. PostFixExpressionConverter**
 - 역할
 
-  역할 설명
+  중위 표현식으로 정렬된 토큰을 후위 표현식으로 재정렬하여 반환한다.
 - 입력 및 출력
 
-  입 출력 설명
+  ExpressionParser에서 처리한 토큰 리스트 입력
+  후위 표현식으로 재정렬한 토큰 리스트를 반환
 - 메서드 설명
 
-  메서드 설명
-  1. ```MEHOTD```
-     >D
-     >d
+  
+  1. ```public List<String> convert(List<String> tokens```
+     >입력받은 tokens 리스트를 순회하며 토큰이 피연산자인 경우 그대로 후위 표현식 토큰 리스트에 담는다.
+     >
+     >토큰이 연산자일 때 operatorStack이 비어있지 않은 경우 스택에서 값을 pop하여 후위 표현식 토큰 리스트에 담는다.
+     >이후 현재 처리중인 토큰은 스택에 push 한다.
+     >순회가 끝나면 operatorStack에 남아있는 연산자를 마지막으로 후위 표현식 토큰 리스트에 담는다.
+     
+     >올바른 표현식이 넘어왔다고 가정하여 예외는 발생시키지 않는다.
 
 **###4. Operator**
 - 역할
 
-  역할 설명
-- 입력 및 출력
-
-  입 출력 설명
+  각 연산자 종류별로 calculate 메서드 연산 과정을 다르게 오버라이딩하여 다형성 구현
 - 메서드 설명
 
-  메서드 설명
-  1. ```MEHOTD```
-     >D
-     >d
+  calculate
+  1. ```public double calculate(double opd1, double opd2)```
+     >enum 클래스의 연산자 종류에 맞게 사칙 연산을 수행하고 double형 결과를 반환한다.
+     >DIVIDE는 0으로 나누는 경우 예외 처리
+  2. ```public static Operator findBySymbol(String token)```
+     >입력된 연산자 문자열 값을 비교하여 Operator 객체를 반환
+     >사용처에서는 operator.calculate(opd1,opd2) 형식으로 각 연산자 종류를 구체적으로 지정하지 않고 사칙 연산 수행
 
 **###5. EmptyExpressionException**
 
