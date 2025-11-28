@@ -57,10 +57,9 @@
 - 설명
   - 주어진 토큰을 검증하는 enum
 - 기능
-  - `public static TokenValidator findValidator(int index, int tokenLength)`
+  - `public static TokenValidator find(int index)`
     - 토큰 인덱스에 따른 검증기를 조회하는 static 메서드 
     - int index : 해당 토큰의 인덱스
-    - int tokenLength : 전체 토큰 길이
   - `public void validate(String token, int index, int tokenLength)`
     - 문자열 토큰을 검증하는 메서드 
     - String token : 문자열 토큰 
