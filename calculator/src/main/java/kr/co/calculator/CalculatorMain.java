@@ -10,11 +10,12 @@ public class CalculatorMain {
         Calculator calculator = new Calculator();
         ExpressionValidator expressionValidator = new ExpressionValidator();
 
-        // 1. 문자열 입력
         Scanner scanner = new Scanner(System.in);
-        String expression = scanner.nextLine();
 
         while (true) {
+            // 1. 문자열 입력
+            String expression = scanner.nextLine();
+
             if (expression.equals("/exit")) {
                 break;
             }
