@@ -28,7 +28,7 @@ class CheckInputExpressionValidationTest {
     }
 
     @ParameterizedTest //347+2*5/
-    @ValueSource(strings = {"3+a47*2/5", "3&47*2/5"}) //알파벳을 포함, 사칙연산 외 기호 포함
+    @ValueSource(strings = {"3+a47*2/5", "3&47*2/5", "4+2-A&B"}) //알파벳을 포함, 사칙연산 외 기호 포함
     @DisplayName("불순물이 포함되어 예외 발생")
     public void expressionParsingInvalidFailTest(String expression) {
         //given
