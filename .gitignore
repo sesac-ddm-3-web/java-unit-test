@@ -9,7 +9,7 @@
 out/
 target/
 
-### mvnw ###
-mvnw
-mvnw.cmd
 calculator/.gitattributes
+calculator/mvnw
+calculator/mvnw.cmd
+.mvn/
