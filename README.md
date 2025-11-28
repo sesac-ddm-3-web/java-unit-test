@@ -18,11 +18,11 @@
 **###1. Calculator**
 - 역할
 
-  매개변수로 전달받은 수식의 연산을 수행하고 결과 반환
+  사칙연산 수행 후 결과 반환
 - 입력 및 출력
 
-  매개변수로 임의의 String expression을 입력받음
-  계산한 결과를 double로 반환
+  1. 매개변수로 임의의 String expression을 입력받음
+  2. 계산한 결과를 double로 반환
 - 메서드 설명
   1. ```public double calculate(String expression)```
      >ExpressionParser 클래스를 사용하여 입력된 문자열을 연산자와 피연산자 단위로 토큰화하여 List로 반환
@@ -42,17 +42,42 @@
 **###2. ExpressionParser**
 - 역할
 
-  역할 설명
+  입력받은 문자열을 연산자와 피연산자 단위로 토큰화하고 잘못된 값에 대한 예외 처리
 - 입력 및 출력
 
-  입 출력 설명
+  1. String inputExpression을 입력받음
+  2. 파싱한 결과를 List<String>으로 반환
+  3. 아래 경우에 대한 예외 처리
+    1. 입력 문자열이 빈 값이거나 공백만 입력된 경우
+    2. 숫자와 연산기호(+, -, *, /)외 다른 문자열이 포함된 경우
+    3. 수식 문법이 맞지 않는 경우
 - 메서드 설명
 
-  메서드 설명
-  1. ```MEHOTD```
-     >D
-     >d
+  1. ```public List<String> checkInputExpressionValidation(String inputExpression)```
+     >처음 입력된 String 값의 모든 공백을 제거
+     >
+     >공백 제거한 문자열이 빈 경우 ```EmptyExpressionException``` 예외 발생
+     >
+     >정규 표현식을 사용하여 숫자와 사칙 연산 기호를 탐색하여 토큰 단위로 구분
+     
+     >불순물이 포함되었는지 확인하기 위해 currentPos값과 matcher.start() 두 값을 비교한다.
+     >
+     >(불순물이 포함된 문자열을 처리한 결과 불순물을 제거하기 때문에 원래 문자열 길이와 달라짐)
+     >이 과정에서 세 개의 변수가 사용된다.
+     >
+     >1. currentPos : 문자열에서 현재 쳐다보고있는 문자열의 위치(정규 표현식 일치 여부와 무관)
+     >2. matcher.start() : 문자열에서 matcher.find()가 실제로 정규 표현식과 일치하는 토큰을 찾은 위치
+     >3. matcher.end() : start()에서 찾은 토큰의 끝 인덱스(다음 탐색할 토큰의 위치 = currentPos가 됨)
+     >   
+     >while 조건인 ```while(matcher.find(currentPos))```에서 matcher.find(currentPos)는 현재 문자열에서 currentPos위치부터 문자열의 끝까지 살펴보며 정규표현에 일치하는 문자열이 존재하는지 확인한다.
+     >(정해진 범위 내에서 일치하는 토큰이 어디든 존재하면 true 반환 -> while문 유지)
+     >
+     >currentPos부터 주어진 문자열에서 정규 표현식에 일치하는 문자열을 찾은 경우 matcher.start()값과 currentPos값을 비교한다.
+     >
+     >문자열에 불순물이 포함되지 않은 경우 currentPos
 
+     > 정규표현식을 사용하여 시작과 끝이 숫자가 아니거나 연산자가 중복되는 경우에 대한 예외(```InvalidGramerException```)를 발생시킨다.
+  
 
 
 **###3. PostFixExpressionConverter**
