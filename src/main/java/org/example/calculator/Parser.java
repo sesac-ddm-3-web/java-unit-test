@@ -2,24 +2,31 @@ package org.example.calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private static final Pattern EXPRESSION_PATTERN =
-            Pattern.compile("^(\\d+([+\\-*/]\\d+)*)$");
-    public static List<String> parsing (String formula) {
-        List<String> result = new ArrayList<>();
+    private static final Pattern TOKEN_PATTERN = Pattern.compile("\\d+|[+\\-*/]");
+    private final Validator validator;
 
-        return result;
+    public Parser(Validator validator) {
+        this.validator = validator;
     }
 
-    private void validateNotBlank(String input) {
-        if(input == null || input.isBlank()) {
-            throw new RuntimeException("입력값은 비어있을 수 없습니다.");
+    public List<String> parse(String input) {
+        validator.validate(input);
+
+        return getTokens(input);
+    }
+
+    private static List<String> getTokens(String input) {
+        List<String> tokens = new ArrayList<>();
+        Matcher matcher = TOKEN_PATTERN.matcher(input);
+
+        while (matcher.find()) {
+            tokens.add(matcher.group());
         }
-    }
 
-    private void validateNotExpression(String input) {
-
+        return tokens;
     }
 }
