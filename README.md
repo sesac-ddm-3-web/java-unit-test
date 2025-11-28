@@ -52,7 +52,7 @@
     2. 숫자와 연산기호(+, -, *, /)외 다른 문자열이 포함된 경우
     3. 수식 문법이 맞지 않는 경우
 - 메서드 설명
-
+  (문자열을 직접적으로 비교하지 않으려고 노력해봤습니다.)
   1. ```public List<String> checkInputExpressionValidation(String inputExpression)```
      >처음 입력된 String 값의 모든 공백을 제거
      >
@@ -60,22 +60,31 @@
      >
      >정규 표현식을 사용하여 숫자와 사칙 연산 기호를 탐색하여 토큰 단위로 구분
      
-     >불순물이 포함되었는지 확인하기 위해 currentPos값과 matcher.start() 두 값을 비교한다.
+     >불순물이 포함되었는지 확인하기 위해 currentPos값과 matcher.start() 두 값을 비교한다.
      >
-     >(불순물이 포함된 문자열을 처리한 결과 불순물을 제거하기 때문에 원래 문자열 길이와 달라짐)
      >이 과정에서 세 개의 변수가 사용된다.
-     >
      >1. currentPos : 문자열에서 현재 쳐다보고있는 문자열의 위치(정규 표현식 일치 여부와 무관)
      >2. matcher.start() : 문자열에서 matcher.find()가 실제로 정규 표현식과 일치하는 토큰을 찾은 위치
-     >3. matcher.end() : start()에서 찾은 토큰의 끝 인덱스(다음 탐색할 토큰의 위치 = currentPos가 됨)
+     >(matcher.start() 메서드는 matcher.find()에서 토큰을 찾은 경우 해당 토큰의 시작 위치 값을 반환)
+     >3. matcher.end() : start()에서 찾은 토큰의 끝 인덱스(다음 탐색할 토큰의 위치 => currentPos에 대입)
      >   
      >while 조건인 ```while(matcher.find(currentPos))```에서 matcher.find(currentPos)는 현재 문자열에서 currentPos위치부터 문자열의 끝까지 살펴보며 정규표현에 일치하는 문자열이 존재하는지 확인한다.
      >(정해진 범위 내에서 일치하는 토큰이 어디든 존재하면 true 반환 -> while문 유지)
      >
-     >currentPos부터 주어진 문자열에서 정규 표현식에 일치하는 문자열을 찾은 경우 matcher.start()값과 currentPos값을 비교한다.
+     >matcher.find()메서드가 currentPos 위치서부터 주어진 문자열에서 정규 표현식에 일치하는 문자열을 찾은 경우
+     >matcher.start()값을 matcher.find()메소드가 찾은 문자열 위치 값으로 설정한다.
+     >matcher.start() 값과 currentPos 값을 비교한다.
+     >(값이 서로 다른 경우 예외 발생)
+     >matcher.end() 메서드는 현재 탐색에 성공한 토큰의 다음 탐색 시작 위치 값을 반환한다.
+     >이 값을 currentPos에 대입하고 다음 while문에서 갱신된 currentPos 위치서부터 다시 matcher.find()를 수행한다.
      >
-     >문자열에 불순물이 포함되지 않은 경우 currentPos
-
+     >만약 (3+4+A-1)와 같이 중간에 불순물이 포함되어 matcher.find()가 그 불순물을 건너뛰고 그 뒤에 토큰을 찾은 경우
+     >matcher.start()는 건너뛴 만큼 더 큰 위치 값을 가질 것이고 currentPos는 그보다 작은 불순물의 위치값을 가지고있을 것이다.
+     >따라서 이 때 if 조건문을 실행했을 때 matcher.find()값과 currentPos값이 다르고 불순물 예외가 발생한다.
+     >
+     >근데 (3+4+A*B)처럼 끝까지 불순물로 이뤄진 경우는 matcher.find()가 실패해서 false를 반환해 if의 예외를 발생시킬 수 없다.
+     >그래서 currentPos와 spaceCleanedExp의 길이를 비교하여 matcher.find()가 중간에 불순물이 끼어 탐색이 중단된건지 끝까지 탐색을 완료하고 정상 종료 된 것인지 비교하여 예외를 발생시킨다.
+     
      > 정규표현식을 사용하여 시작과 끝이 숫자가 아니거나 연산자가 중복되는 경우에 대한 예외(```InvalidGramerException```)를 발생시킨다.
   
 
