@@ -42,6 +42,10 @@ public class ExpressionParser {
             //currentPos(=탐색할 위치)의 값을 matcher.end()(그 다음 탐색할 위치 값)으로 변경
             currentPos = matcher.end();
         }
+        // while 루프 종료 후 추가
+        if (currentPos != spaceCleanedExp.length()) { // expression은 전체 연산식 문자열
+            throw new IllegalArgumentException("수식 끝에 불순물 포함");
+        }
 
         //숫자와 사칙연산 기호에 대한 검사는 완료
         //수식 오류 예외처리
