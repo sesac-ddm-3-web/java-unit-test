@@ -15,7 +15,7 @@
 (예를 들어 "2 + 3 * 4 / 2"와 같은 문자열을 입력할 경우 2 + 3 * 4 / 2 실행 결과인 10을 출력해야 한다.)
 
 # 클래스 구조
-###1.Calculator
+### 1.Calculator
 - 역할
 
   사칙연산 수행 후 결과 반환
@@ -39,7 +39,7 @@
      >
      >최종 연산 후 스택에 남은 값을 반환
 
-###2.ExpressionParser
+### 2.ExpressionParser
 - 역할
 
   입력받은 문자열을 연산자와 피연산자 단위로 토큰화하고 잘못된 값에 대한 예외 처리
@@ -89,7 +89,7 @@
   
 
 
-###3.PostFixExpressionConverter
+### 3.PostFixExpressionConverter
 - 역할
 
   중위 표현식으로 정렬된 토큰을 후위 표현식으로 재정렬하여 반환한다.
@@ -109,7 +109,7 @@
      
      >올바른 표현식이 넘어왔다고 가정하여 예외는 발생시키지 않는다.
 
-###4.Operator
+### 4.Operator
 - 역할
 
   각 연산자 종류별로 calculate 메서드 연산 과정을 다르게 오버라이딩하여 다형성 구현
@@ -123,20 +123,20 @@
      >입력된 연산자 문자열 값을 비교하여 Operator 객체를 반환
      >사용처에서는 operator.calculate(opd1,opd2) 형식으로 각 연산자 종류를 구체적으로 지정하지 않고 사칙 연산 수행
 
-###5.EmptyExpressionException
+### 5.EmptyExpressionException
 - 역할
 
   빈 문자열 혹은 공백으로만 이뤄진 문자열에 대한 예외
-###6.InvalidGramerException
+### 6.InvalidGramerException
 
 - 역할
 
   문법에 맞지 않는 수식에 대한 예외
-###7.CalculatorTest
+### 7.CalculatorTest
 
 1. 올바른 수식을 입력하여 실제 값과 비교하여 제대로된 사칙 연산 결과를 반환하는지 테스트
 2. 0으로 나누는 경우 예외 발생 테스트
-###8.CheckInputExpressionValidationTest
+### 8.CheckInputExpressionValidationTest
 
 1. 올바른 수식에 대한 파싱 성공 테스트
 ```@ValueSource(strings = {"3+47*2/5", "3 + 47 * 2 / 5", "3+ 47 * 2/5"})```
@@ -146,6 +146,6 @@
 ```@ValueSource(strings = {"", "    "}```
 4. 수식의 문법이 잘못된 경우 예외 발생 테스트
 ```@ValueSource(strings = {"+3*4", "2+3*", "+3*4/", "2*/34"})```
-###9.PostFixExpressionConverterTest
+### 9.PostFixExpressionConverterTest
 
 1. 후위 표현식 정상 변환 성공 테스트
