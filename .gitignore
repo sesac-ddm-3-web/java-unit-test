@@ -1,0 +1,13 @@
+# IDE 설정 파일
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# 빌드 및 캐시
+.gradle/
+build/
+out/
+
+# macOS 시스템 파일
+.DS_Store
