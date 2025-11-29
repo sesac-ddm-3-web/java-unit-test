@@ -7,10 +7,12 @@ public class ExpressionTokenizer {
     private static final String DELIMITER = " ";
 
     public String[] tokenize(String expression) {
+        validateExpressionBlank(expression);
+
         String targetExpression = expression.trim();
 
-        validateExpression(targetExpression);
-
+        validateExpressionRegex(targetExpression);
+        
         String[] tokens = targetExpression.split(DELIMITER);
 
         validateTokens(tokens);
@@ -18,7 +20,13 @@ public class ExpressionTokenizer {
         return tokens;
     }
 
-    private void validateExpression(String expression) {
+    private void validateExpressionBlank(String expression) {
+        if (expression == null || expression.isBlank()) {
+            throw new IllegalArgumentException("수식은 비어 있을 수 없습니다.");
+        }
+    }
+
+    private void validateExpressionRegex(String expression) {
         if (!expression.matches(EXPRESSION_REGEX)) {
             throw new IllegalArgumentException("수식은 정수, 사칙연산 기호와 구분자로 공백 한 칸만을 허용합니다.");
         }

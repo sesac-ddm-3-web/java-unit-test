@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @SuppressWarnings("NonAsciiCharacters")
@@ -34,6 +35,18 @@ class ExpressionTokenizerTest {
 
         // then
         assertThat(actual).containsExactly("-2", "+", "3");
+    }
+
+    @ParameterizedTest(name = "수식이 {0} 일 때 토큰화할 수 없다")
+    @NullAndEmptySource
+    void 수식이_비어_있으면_토큰화_할_수_없다(String expression) {
+        // given
+        ExpressionTokenizer expressionTokenizer = new ExpressionTokenizer();
+
+        // when & then
+        assertThatThrownBy(() -> expressionTokenizer.tokenize(expression))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("수식은 비어 있을 수 없습니다.");
     }
 
     @ParameterizedTest(name = "수식이 {0} 일 때 토큰화할 수 없다")
