@@ -51,7 +51,7 @@ class OperatorTest {
     @DisplayName("각 연산이 정상 수행된다.")
     void goodCalculate(String symbol, int operand1, int operand2, int expected) {
         Operator operator = Operator.of(symbol);
-        int result = operator.apply(operand1, operand2);
+        int result = operator.calculate(operand1, operand2);
         assertThat(result).isEqualTo(expected);
     }
 
@@ -62,7 +62,7 @@ class OperatorTest {
         Operator divide = Operator.DIVIDE;
 
         // when & then
-        assertThatThrownBy(() -> divide.apply(10, 0))
+        assertThatThrownBy(() -> divide.calculate(10, 0))
                 .isInstanceOf(ArithmeticException.class)
                 .hasMessageContaining("0으로 나눌 수 없습니다.");
     }

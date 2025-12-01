@@ -22,7 +22,7 @@ public class StringCalculator {
             Operator operator = Operator.of(operatorToken);
             int next = Integer.parseInt(nextNumberToken);
 
-            result = operator.apply(result, next);
+            result = operator.calculate(result, next);
         }
         return result;
     }

@@ -1,7 +1,7 @@
 package org.example;
 
 import java.util.Arrays;
-import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
     PLUS("+", (a,b) -> a + b),
@@ -15,15 +15,15 @@ public enum Operator {
     });
 
     private final String operator;
-    private final BiFunction<Integer, Integer, Integer> biFunction;
+    private final BinaryOperator<Integer> binaryOperator;
 
-    Operator(String operator, BiFunction<Integer, Integer, Integer> biFunction) {
+    Operator(String operator,  BinaryOperator<Integer> binaryOperator) {
         this.operator = operator;
-        this.biFunction = biFunction;
+        this.binaryOperator = binaryOperator;
     }
 
-    public int apply(int a, int b) {
-        return biFunction.apply(a, b);
+    public int calculate(int a, int b) {
+        return binaryOperator.apply(a, b);
     }
 
     public static Operator of(String symbol) {
@@ -31,9 +31,5 @@ public enum Operator {
                 .filter(op -> op.operator.equals(symbol))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 연산자입니다. " + symbol));
-    }
-
-    public static void validateOperator(String symbol) {
-        of(symbol);
     }
 }

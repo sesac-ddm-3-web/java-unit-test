@@ -28,7 +28,7 @@ public class Tokenizer {
 
             //정확한 수식이면 홀수 자리에 연산자가 존재해야함. Operator의 메소드로 검증
             if (i % 2 == 1) {
-                Operator.validateOperator(token);
+                Operator.of(token);
             }
             else {
                 //정확한 수식이면 짝수 자리에 숫자가 존재해야함.
