@@ -5,7 +5,12 @@ import java.util.List;
 
 public class Cars {
 
+    private static final int MIN_PARTICIPANT_COUNT = 2;
+    private static final int MAX_PARTICIPANT_COUNT = 10;
+
     public static Cars readyToRace(int participantCount) {
+        validateParticipantCount(participantCount);
+
         List<Car> cars = new ArrayList<>();
 
         for (int i = 0; i < participantCount; i++) {
@@ -13,6 +18,12 @@ public class Cars {
         }
 
         return new Cars(cars);
+    }
+
+    private static void validateParticipantCount(int participantCount) {
+        if (participantCount < MIN_PARTICIPANT_COUNT || participantCount > MAX_PARTICIPANT_COUNT) {
+            throw new IllegalArgumentException("유효한 참가자 수가 아닙니다.");
+        }
     }
 
     private final List<Car> participants;
