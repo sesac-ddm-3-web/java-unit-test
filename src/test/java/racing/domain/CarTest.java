@@ -46,12 +46,12 @@ class CarTest {
     @Test
     void 이동하는_경우_기존_위치에서_이동_거리_전략에_따라_전진한다() {
         // given
-        Car car = Car.atStartLine();
+        Car car = Car.atStartLine(); // 최초 position : 1
 
         // when
         Car actual = car.move(() -> 4, position -> position + 7);
 
         // then
-        assertThat(actual.getPosition()).isEqualTo(8);
+        assertThat(actual.getPosition()).isEqualTo(8); // 1 + 7 = 8
     }
 }
