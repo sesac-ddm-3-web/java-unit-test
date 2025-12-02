@@ -40,7 +40,7 @@ public enum Operation {
         }
 
         return Arrays.stream(values())
-                .filter(operation -> operation.op.equals(operator))
+                .filter(operation -> Objects.equals(operation.op , operator))
                 .findFirst()
                 .orElseThrow(() -> new CalculatorException(ExceptionCode.INVALID_OPERATOR));
     }

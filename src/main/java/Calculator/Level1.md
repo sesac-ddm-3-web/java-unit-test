@@ -25,7 +25,7 @@
 - 토큰을 큐에 넣는다.
 ## Calculator 클래스 비즈니스 로직
 - 토큰을 담은 큐에서 하나씩 빼서 계산한다.
-
+---
 # 예외처리 
 - 커스텀예외 CalculatorException으로 통일
 - 예외메시지를 Enum으로 관리 
@@ -37,5 +37,9 @@
     3.2 입력값이 Null이거나 빈 공백 문자일 경우 <br>
     3.3 사칙연산 기호가 아닌 경우  <br>
 ---
+# 수정사항
+1.테스트 beforeEach , ParameterizedTest, ValueSource 에노테이션 활용
+2.findOperator 수정 
+
 
 
