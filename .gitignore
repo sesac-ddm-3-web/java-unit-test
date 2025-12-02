@@ -5,11 +5,4 @@
 .DS_Store
 
 ### IntelliJ ###
-.idea/
-out/
-target/
-
-calculator/.gitattributes
-calculator/mvnw
-calculator/mvnw.cmd
-.mvn/
+.idea
