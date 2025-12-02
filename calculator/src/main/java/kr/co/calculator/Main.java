@@ -1,5 +1,10 @@
 package kr.co.calculator;
 
+import kr.co.calculator.domain.Calculator;
+import kr.co.calculator.domain.ExpressionTokenizer;
+import kr.co.calculator.io.InputHelper;
+import kr.co.calculator.io.OutputHelper;
+
 import java.util.Scanner;
 
 public class Main {
@@ -11,41 +16,22 @@ public class Main {
          * 예를 들어 "2 + 3 * 4 / 2"와 같은 문자열을 입력할 경우 2 + 3 * 4 / 2 실행 결과인 10을 출력해야 한다.
          */
 
-        Scanner scanner = new Scanner(System.in);
+        ExpressionTokenizer expressionTokenizer = new ExpressionTokenizer();
 
-        String expression = scanner.nextLine();
+        Calculator calculator = new Calculator(expressionTokenizer);
 
-        expression = expression.trim();
-        expression = expression.replaceAll(" ", "");
+        OutputHelper outputHelper = new OutputHelper();
 
-        Integer ret = expression.charAt(0) - '0';
+        try(Scanner scanner = new Scanner(System.in)) {
+            InputHelper inputHelper = new InputHelper(scanner);
+            
+            String expression = inputHelper.inputExpression(); // 입력
 
-        for (int i = 1; i < expression.length() - 1; i += 2) {
-            char oper = expression.charAt(i);
-            int val = expression.charAt(i + 1) - '0';
+            Integer result = calculator.calculate(expression); // 각 토큰 검증 -> 토큰화 완료 -> 계산
 
-            switch (oper) {
-                case '+':
-                    ret += val;
-                    break;
-                case '-':
-                    ret -= val;
-                    break;
-                case '*':
-                    ret *= val;
-                    break;
-                case '/':
-                    if (val == 0) {
-                        throw new ArithmeticException("0으로 나눌 수 없습니다.");
-                    }
-
-                    ret /= val;
-                    break;
-                default:
-                    throw new RuntimeException("잘못된 수식입니다");
-            }
+            outputHelper.printResult(result); // 출력
+        } catch (IllegalArgumentException e) {
+            outputHelper.printExceptionMessage(e.getMessage());
         }
-
-        System.out.println(ret);
     }
 }
