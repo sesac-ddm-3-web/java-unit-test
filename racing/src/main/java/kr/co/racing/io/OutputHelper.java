@@ -1,8 +1,8 @@
 package kr.co.racing.io;
 
 public class OutputHelper {
-    public void printResult(Integer output) {
-        System.out.println("실행 결과\n" + output);
+    public void printResult(String output) {
+        System.out.print("실행 결과:\n" + output);
     }
 
     public void printExceptionMessage(String exceptionMessage) {

@@ -1,13 +1,13 @@
 package kr.co.racing;
 
 import kr.co.racing.domain.InitRacing;
+import kr.co.racing.domain.numbergenerator.NumberGenerator;
 import kr.co.racing.domain.RaceRunner;
-import kr.co.racing.domain.RandomNumberGenerator;
+import kr.co.racing.domain.numbergenerator.RandomNumberGenerator;
 import kr.co.racing.io.InputHelper;
 import kr.co.racing.io.OutputHelper;
 
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -21,50 +21,25 @@ public class Main {
          */
 
         InitRacing initRacing = new InitRacing();
+        NumberGenerator numberGenerator = new RandomNumberGenerator();
+        OutputHelper outputHelper = new OutputHelper();
 
-        OutputHelper outputHelper =  new OutputHelper();
-
-        try(Scanner scanner = new Scanner(System.in)) {
+        try (Scanner scanner = new Scanner(System.in)) {
             InputHelper inputHelper = new InputHelper(scanner);
 
-            // input
             Integer numberOfCars = inputHelper.inputNumberOfCars();
             Integer tryCount = inputHelper.inputTryCount();
 
-            // set size of racing roads and initialize
             List<String> racingRoads = initRacing.initRacingRoads(numberOfCars);
 
-            // run
-            RaceRunner raceRunner = new RaceRunner(racingRoads, tryCount,
-                    new RandomNumberGenerator());
+            RaceRunner raceRunner = new RaceRunner(racingRoads, tryCount, numberGenerator);
 
-            raceRunner.run();
+            String result = raceRunner.run();
 
-//            outputHelper.printResult(result); // 출력
+            outputHelper.printResult(result);
+
         } catch (IllegalArgumentException e) {
             outputHelper.printExceptionMessage(e.getMessage());
         }
-
-//        Random random = new Random();
-//
-//        System.out.println("실행결과");
-//        for (int i = 0; i < tryCount; i++) {
-//            // 각 자동차에 대해 0 ~ 9 사이의 숫자를 뽑고, 4 이상이면 한 칸 전진
-//            for (int j = 0; j < numberOfCars; j++) {
-//                int randomValue = random.nextInt(10); // 0 ~ 9 뽑기
-//
-//                if (randomValue >= 4) {
-//                    String before = racingRecords.get(j);
-//                    racingRecords.set(j, before + "-");
-//                }
-//            }
-//
-//            // 현재 시점의 각 자동차 위치 출력
-//            for (int j = 0; j < numberOfCars; j++) {
-//                System.out.println(racingRecords.get(j));
-//            }
-//
-//            System.out.println();
-//        }
     }
 }
