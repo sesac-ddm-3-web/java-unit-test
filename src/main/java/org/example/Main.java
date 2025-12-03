@@ -1,5 +1,11 @@
 package org.example;
 
+import org.example.domain.Cars;
+import org.example.ui.InputView;
+import org.example.ui.ResultView;
+import org.example.utils.NumberGenerator;
+import org.example.utils.RandomNumberGenerator;
+
 public class Main {
     public static void main(String[] args) {
         InputView inputView = new InputView();

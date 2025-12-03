@@ -1,5 +1,9 @@
 package org.example;
 
+import org.example.domain.Cars;
+import org.example.ui.ResultView;
+import org.example.utils.NumberGenerator;
+
 public class CarRacingGame {
     private final NumberGenerator numberGenerator;
     private final ResultView resultView;

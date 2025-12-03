@@ -1,8 +1,8 @@
-package org.example;
+package org.example.utils;
 
 import java.util.Random;
 
-public class RandomNumberGenerator implements NumberGenerator{
+public class RandomNumberGenerator implements NumberGenerator {
     private final Random random = new Random();
 
     @Override

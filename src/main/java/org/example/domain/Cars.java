@@ -1,4 +1,6 @@
-package org.example;
+package org.example.domain;
+
+import org.example.utils.NumberGenerator;
 
 import java.util.ArrayList;
 import java.util.List;

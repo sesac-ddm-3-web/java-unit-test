@@ -1,4 +1,7 @@
-package org.example;
+package org.example.ui;
+
+import org.example.domain.Car;
+import org.example.domain.Cars;
 
 public class ResultView {
 
