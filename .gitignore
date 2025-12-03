@@ -1,0 +1,27 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# macOS
+.DS_Store
+
+# Gradle
+.gradle/
+build/
+out/
+
+# Logs
+*.log
+
+# Java
+*.class
+
+# OS-specific
+Thumbs.db
+
+# Wrapper executables (이미 커밋된 경우 제외 가능)
+!gradlew
+!gradlew.bat
+!gradle/wrapper/gradle-wrapper.jar
