@@ -1,7 +1,18 @@
 package org.example;
 
 public class ResultView {
-    public void OutputExpression(int result) {
-        System.out.println(result);
+
+    public void printBeforeGame(){
+        System.out.println();
+        System.out.println("실행 결과");
+    }
+
+    public void printCarGame(Cars cars){
+        for(Car car : cars.getCars()){
+            System.out.println("-".repeat(car.getPosition()));
+        }
+    }
+    public void printNewLine(){
+        System.out.println();
     }
 }
